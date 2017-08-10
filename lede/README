@@ -28,15 +28,19 @@ recursively copy (i.e. cp -a) from bin-lede-4099-g4c3953ba29-airrouter-futel-wor
 (where {N} is the number of cores on your build box)
 
 If everything goes well, you should end up with an image in bin/targets/ar71xx/generic/
+For the Ubiquiti AirRouter, the images are lede-ar71xx-generic-ubnt-airrouter-squashfs-*.bin
+
+The firmware upgrade procedure is described at https://lede-project.org/docs/user-guide/ssh-firmware-upgrade
+The sysupgrade image is used if openwrt or lede is already on the router. Otherwise the factory image is used.
+Use the -n argument to erase any exisiting config.
+
+  sysupgrade -v -n /tmp/<image>.bin
 
 Note, the build will chew up a bunch of disk space.  On the order of 20 gigabytes (rough guess).
 
 You can read details about the build system here:
 
   https://lede-project.org/docs/guide-developer/install-buildsystem
-
-I am happy to build these for you, to your specs.  It's what I do all day long and I 
-know the various quirks to the point that I couldn't possibly describe them in advance.
 
 The wifi is disabled by default.  You can only ssh in from a LAN port.  The LAN network
 is 192.168.1.0/24 by default.  I'm sure I'm forgetting something(s).  Please ask if you 
