@@ -30,7 +30,10 @@ recursively copy (i.e. cp -a) from bin-lede-4099-g4c3953ba29-airrouter-futel-wor
 If everything goes well, you should end up with an image in bin/targets/ar71xx/generic/
 For the Ubiquiti AirRouter, the images are lede-ar71xx-generic-ubnt-airrouter-squashfs-*.bin
 
-The firmware upgrade procedure is described at https://lede-project.org/docs/user-guide/ssh-firmware-upgrade
+The firmware upgrade procedure is described at
+https://lede-project.org/docs/user-guide/ssh-firmware-upgrade
+https://lede-project.org/docs/guide-quick-start/sysupgrade.luci
+
 The sysupgrade image is used if openwrt or lede is already on the router. Otherwise the factory image is used.
 Use the -n argument to erase any exisiting config.
 
