@@ -14,7 +14,7 @@ built images are in bin/targets/ar71xx/generic/
 for the Ubiquiti AirRouter, the images are lede-ar71xx-generic-ubnt-airrouter-squashfs-*.bin
 
 
-Install:
+Install to Ubiquiti AirRouter with lede already installed::
 
 connect to router over wired ethernet
 find routers IP address with "ip a"
