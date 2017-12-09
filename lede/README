@@ -28,7 +28,12 @@ change password on router
   ssh root:test@192.168.1.1
   passwd
 edit /etc/config/network on router for address unique in local network e.g.
-option ipaddr '192.168.8.1'
+  option ipaddr '192.168.8.1'
+edit /etc/resolv.conf to use google dns, and protect
+  rm /etc/resolv.conf
+  echo "search lan" >> /etc/resolv.conf
+  echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+  echo "nameserver 4.4.4.4" >> /etc/resolv.conf
 reboot router
 
 Notes:
@@ -41,7 +46,8 @@ The sysupgrade image is used if openwrt or lede is already on the router. Otherw
 Use the -n argument to erase any exisiting config.
 
 Replace passwd step with copying shadow to build/files/etc/shadow
-Replace ip address step with copying network to build/files/etc/config/network
+Replace ip address step with copying network to build/files/etc/config/network?
+Replace nameserver step with copying resolv.conf to build/files/etc/resolv.conf? Or network? Or dhcp?
 
 The wifi is disabled by default.  You can only ssh in from a LAN port.  The LAN network
 is 192.168.1.0/24 by default.
