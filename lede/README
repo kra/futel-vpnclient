@@ -14,33 +14,55 @@ built images are in bin/targets/ar71xx/generic/
 for the Ubiquiti AirRouter, the images are lede-ar71xx-generic-ubnt-airrouter-squashfs-*.bin
 
 
-Install to Ubiquiti AirRouter with lede already installed::
+Install to Ubiquiti AirRouter with lede already installed:
 
-connect to router over wired ethernet
 find routers IP address with "ip a"
-copy image to router
+
+copy sysupgrade image to router running lede:
   scp bin/targets/ar71xx/generic/lede-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin root@192.168.1.1:/tmp
-flash image
+flash sysupgrade image
   ssh root@192.168.1.1
   sysupgrade -v -n /tmp/lede-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin
 wait for router to reboot
+
+copy factory image to ubiquiti airrouter running factory:
+$ tftp 192.168.1.20
+tftp> mode binary
+tftp> put XM-v5.5.2.build14175.bin flash_update
+Sent 6736122 bytes in 9.4 seconds
+tftp> quit
+power cycle router
+
+
 change password on router
   ssh root:test@192.168.1.1
   passwd
+
 edit /etc/config/network on router for address unique in local network e.g.
-  option ipaddr '192.168.8.1'
-edit /etc/resolv.conf to use google dns, and protect
+  config interface 'lan'
+    ...
+    option ipaddr '192.168.8.1'
+
+alternative: edit /etc/resolv.conf to use google dns, and protect
   rm /etc/resolv.conf
   echo "search lan" >> /etc/resolv.conf
   echo "nameserver 8.8.8.8" >> /etc/resolv.conf
   echo "nameserver 4.4.4.4" >> /etc/resolv.conf
+alternative: edit /etc/resolv.conf to use upstream dns, and protect
+  rm /etc/resolv.conf
+  echo "search lan" >> /etc/resolv.conf
+  echo "nameserver 127.0.0.1" >> /etc/resolv.conf
+
+
 reboot router
 
 Notes:
 
-firmware upgrade docs:
+sysupgrade firmware:
 https://lede-project.org/docs/user-guide/sysupgrade.cli
 https://lede-project.org/docs/guide-quick-start/sysupgrade.luci
+factory firmware:
+https://wiki.openwrt.org/toh/ubiquiti/airrouter
 
 The sysupgrade image is used if openwrt or lede is already on the router. Otherwise the factory image is used.
 Use the -n argument to erase any exisiting config.
