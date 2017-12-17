@@ -47,7 +47,7 @@ alternative: edit /etc/resolv.conf to use google dns, and protect
   rm /etc/resolv.conf
   echo "search lan" >> /etc/resolv.conf
   echo "nameserver 8.8.8.8" >> /etc/resolv.conf
-  echo "nameserver 4.4.4.4" >> /etc/resolv.conf
+  echo "nameserver 8.8.4.4" >> /etc/resolv.conf
 alternative: edit /etc/resolv.conf to use upstream dns, and protect
   rm /etc/resolv.conf
   echo "search lan" >> /etc/resolv.conf
