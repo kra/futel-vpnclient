@@ -1,0 +1,6 @@
+test:
+
+have creds directory containing creds from futel-vpnbox/creds
+ca.crt client.crt client.key
+
+sudo openvpn --config client.conf
