@@ -1,18 +1,29 @@
-Build:
+Prepare build:
 
 have client.crt client.key
 
   git clone https://git.openwrt.org/source.git build
   cp -r files build
   cp client.crt client.key build/files/etc/openvpn/keys
-  cp config-stub build/.config
+
+Set up build for Netgear WGT634U:
+
+  cp config-stub-wgt634u build/.config
+
+Set up build for Ubiquiti AirRouter:
+
+  cp config-stub-airrouter build/.config
+
+Build:
+
   cd build
   make defconfig
   time make -j2 BUILD_LOG=1 IGNORE_ERRORS=m V=s  # for 2 cores
 
 built images are in bin/targets/ar71xx/generic/
-for the Ubiquiti AirRouter, the images are openwrt-ar71xx-generic-ubnt-airrouter-squashfs-*.bin
-
+For the Ubiquiti AirRouter, the images are bin/targets/ar71xx/generic/openwrt-ar71xx-generic-ubnt-airrouter-squashfs-*.bin
+For the Netgear WGT634U, the images are bin/targets/brcm47xx/legacy/openwrt-brcm47xx-legacy-standard-noloader-gz-squashfs.trx
+XXX or openwrt-brcm47xx-legacy-netgear-wgt634u-squashfs.bin ?
 
 Install to Ubiquiti AirRouter with OpenVPN or LEDE already installed:
 
