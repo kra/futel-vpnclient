@@ -9,10 +9,12 @@ have client.crt client.key
 Set up build for Netgear WGT634U:
 
   cp config-stub-wgt634u build/.config
+  cp futel.defaults-wgt634u files/etc/uci-defaults/futel.defaults  
 
 Set up build for Ubiquiti AirRouter:
 
   cp config-stub-airrouter build/.config
+  cp futel.defaults-airrouter files/etc/uci-defaults/futel.defaults
 
 Build:
 
