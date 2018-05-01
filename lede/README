@@ -1,18 +1,30 @@
-Build:
+Prepare build:
 
 have client.crt client.key
 
   git clone https://git.openwrt.org/source.git build
   cp -r files build
   cp client.crt client.key build/files/etc/openvpn/keys
-  cp config-stub build/.config
+
+Set up build for Netgear WGT634U:
+
+  cp config-stub-wgt634u build/.config
+  cp futel.defaults-wgt634u files/etc/uci-defaults/futel.defaults  
+
+Set up build for Ubiquiti AirRouter:
+
+  cp config-stub-airrouter build/.config
+  cp futel.defaults-airrouter files/etc/uci-defaults/futel.defaults
+
+Build:
+
   cd build
   make defconfig
   time make -j2 BUILD_LOG=1 IGNORE_ERRORS=m V=s  # for 2 cores
 
 built images are in bin/targets/ar71xx/generic/
-for the Ubiquiti AirRouter, the images are openwrt-ar71xx-generic-ubnt-airrouter-squashfs-*.bin
-
+For the Ubiquiti AirRouter, the images are bin/targets/ar71xx/generic/openwrt-ar71xx-generic-ubnt-airrouter-squashfs-*.bin
+For the Netgear WGT634U, the images are bin/targets/brcm47xx/legacy/openwrt-brcm47xx-legacy-standard-squashfs.trx
 
 Install to Ubiquiti AirRouter with OpenVPN or LEDE already installed:
 
@@ -22,7 +34,7 @@ flash sysupgrade image
   sysupgrade -v -n /tmp/openwrt-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin
 wait for router to reboot
 
-Install to Ubiquiti AirRouter with factory install:
+Install to Ubiquiti AirRouter with factory install (caution, don't update with a factory image version 6 or later, or you will flash a locked bootloader):
 
 $ tftp 192.168.1.20
 tftp> mode binary
