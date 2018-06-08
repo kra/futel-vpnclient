@@ -23,15 +23,15 @@ Build:
   time make -j2 BUILD_LOG=1 IGNORE_ERRORS=m V=s  # for 2 cores
 
 built images are in bin/targets/ar71xx/generic/
-For the Ubiquiti AirRouter, the images are bin/targets/ar71xx/generic/openwrt-ar71xx-generic-ubnt-airrouter-squashfs-*.bin
-For the Netgear WGT634U, the images are bin/targets/brcm47xx/legacy/openwrt-brcm47xx-legacy-standard-squashfs.trx
+For the Ubiquiti AirRouter, the image is bin/targets/ar71xx/generic/openwrt-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin
+For the Netgear WGT634U, the image is bin/targets/brcm47xx/legacy/openwrt-brcm47xx-legacy-standard-squashfs.trx
 
-Install to Ubiquiti AirRouter with OpenVPN or LEDE already installed:
+Install to router with OpenVPN or LEDE already installed:
 
-  scp bin/targets/ar71xx/generic/openwrt-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin root@192.168.1.1:/tmp
-flash sysupgrade image
+  scp <image> root@192.168.1.1:/tmp
   ssh root@192.168.1.1
-  sysupgrade -v -n /tmp/openwrt-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin
+  sysupgrade -v -n /tmp/<image>
+  
 wait for router to reboot
 
 Install to Ubiquiti AirRouter with factory install (caution, don't update with a factory image version 6 or later, or you will flash a locked bootloader):
